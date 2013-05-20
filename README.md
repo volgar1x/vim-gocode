@@ -11,6 +11,10 @@ Add this line to your ~/.vimrc configuration file :
 
 > Bundle 'Blackrush/vim-gocode'
 
+And then run vim :
+
+> vim +BundleInstall
+
 ### Pathogen
 
 *todo*
