@@ -1,7 +1,7 @@
 vim-gocode
 ==========
 
-All credit goes to [https://github.com/nsf/gocode](nsf/gocode)
+All credit goes to [nsf/code](http://github.com/nsf/gocode)
 
 ## Installation
 
