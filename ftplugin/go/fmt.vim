@@ -17,7 +17,7 @@ if exists("b:did_ftplugin_go_fmt")
 endif
 
 command! -buffer Fmt call s:GoFormat()
-autocmd FileType go autocmd BufWritePre <buffer> :Fmt
+autocmd FileType go autocmd BufWritePre <buffer> :keepjumps Fmt " thanks @justinmk
 
 function! s:GoFormat()
     let view = winsaveview()
