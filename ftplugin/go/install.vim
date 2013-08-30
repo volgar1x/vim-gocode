@@ -2,7 +2,7 @@ if exists("b:did_ftplugin_go_install")
 	finish
 endif
 
-command! -buffer -nargs=1 Install call s:GoInstall(@%, <f-args>)
+command! -buffer -nargs=1 GoInstall call s:GoInstall(@%, <f-args>)
 function! s:GoInstall(file, relpkg)
 	let pkg=GoRelPkg(a:file, a:relpkg)
 	if pkg != -1
@@ -12,6 +12,16 @@ function! s:GoInstall(file, relpkg)
 		else
 			echo output
 		endif
+	else
+		echohl Error | echo 'You are not in a go package' | echohl None
+	endif
+endfunction
+
+command! -buffer -nargs=1 GoTest call s:GoTest(@%, <f-args>)
+function! s:GoTest(file, relpkg)
+	let pkg=GoRelPkg(a:file, a:relpkg)
+	if pkg != -1
+		echo system('go test '.pkg)
 	else
 		echohl Error | echo 'You are not in a go package' | echohl None
 	endif
