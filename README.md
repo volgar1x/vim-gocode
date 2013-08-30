@@ -17,7 +17,7 @@ All credit goes to [nsf/code](http://github.com/nsf/gocode)
 
 *Example* `:Install ../pkg/child` in the `$GOPATH/src/github.com/Blackrush/gofus/main.go` file will try to install the `github.com/Blackrush/pkg/child` package
 
-See #1 to see future commands implementation.
+See [#1](https://github.com/Blackrush/vim-gocode/issues/1) to see future commands implementation.
 
 ## Installation
 
