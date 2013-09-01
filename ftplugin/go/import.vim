@@ -39,8 +39,17 @@ endif
 command! -buffer -nargs=? -complete=customlist,go#complete#Package Drop call s:SwitchImport(0, '', <f-args>)
 command! -buffer -nargs=1 -complete=customlist,go#complete#Package Import call s:SwitchImport(1, '', <f-args>)
 command! -buffer -nargs=* -complete=customlist,go#complete#Package ImportAs call s:SwitchImport(1, <f-args>)
+
+command! -buffer -nargs=? -complete=customlist,GocodeCompletePkg GoDrop call s:RelSwitchImport(0, getcwd(), '', <f-args>)
+command! -buffer -nargs=1 -complete=customlist,GocodeCompletePkg GoImport call s:RelSwitchImport(1, getcwd(), '', <f-args>)
+command! -buffer -nargs=* -complete=customlist,GocodeCompletePkg GoImportAs call s:RelSwitchImport(1, getcwd(), <f-args>)
+
 map <buffer> <LocalLeader>f :Import fmt<CR>
 map <buffer> <LocalLeader>F :Drop fmt<CR>
+
+function! s:RelSwitchImport(enabled, basefile, localname, path)
+    call s:SwitchImport(a:enabled, a:localname, GoRelPkg(a:basefile, a:path))
+endfunction
 
 function! s:SwitchImport(enabled, localname, path)
     let view = winsaveview()

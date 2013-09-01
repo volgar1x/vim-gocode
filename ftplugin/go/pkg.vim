@@ -39,7 +39,11 @@ function! GoPkg(arg)
 endfunction
 
 function! GoRelPkg(file, relpkg)
-	return GoPkg(DirName(a:file).'/'.a:relpkg)
+	if isdirectory(a:file)
+		return GoPkg(a:file.'/'.a:relpkg)
+	else
+		return GoPkg(DirName(a:file).'/'.a:relpkg)
+	end
 endfunction
 
 command! -buffer CurPkg call s:GoCurPkg()
