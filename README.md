@@ -13,9 +13,28 @@ All credit goes to [nsf/code](http://github.com/nsf/gocode)
 
 *Example* `:RelPkg ../pkg/child` in the `$GOPATH/src/github.com/Blackrush/gofus/main.go` file will print `github.com/Blackrush/pkg/child`
 
-* **:Install** takes one argument, a relative package path, install it or print compilation errors otherwise
+* **:GoInstall** takes one argument, a relative package path, install it or print compilation errors otherwise
 
-*Example* `:Install ../pkg/child` in the `$GOPATH/src/github.com/Blackrush/gofus/main.go` file will try to install the `github.com/Blackrush/pkg/child` package
+*Example* `:GoInstall ../pkg/child` with current working directory `$GOPATH/src/github.com/Blackrush/gofus`
+will try to install the `github.com/Blackrush/pkg/child` package
+
+* **:GoCurInstall** takes no argument and try to install the current file's package
+
+*Example* `:GoCurInstall` in the file `$GOPATH/src/github.com/Blackrush/gofus/main.go` will try to install the
+package `github.com/Blackrush/gofus`
+
+* **:GoTest** takes one argument, a relative package path, test it and print its output
+
+*Example* `:GoTest ../pkg/child` with current working directory `$GOPATH/src/github.com/Blackrush/gofus`
+will try to test the `github.com/Blackrush/pkg/child` package
+
+* **:GoCurTest** takes no argument and try to test the current file's package
+
+*Example* `:GoCurTest` in the file `$GOPATH/src/github.com/Blackrush/gofus/main.go` will try to test the
+package `github.com/Blackrush/gofus`
+
+* **:GoImport**, **:GoImportAs** and **GoDrop** are equivalent of original **:Import**, **:ImportAs** and **:Drop**
+but takes all a relative package path to the current working directory
 
 See [#1](https://github.com/Blackrush/vim-gocode/issues/1) to see future commands implementation.
 
