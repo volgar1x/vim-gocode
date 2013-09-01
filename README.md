@@ -33,7 +33,7 @@ will try to test the `github.com/Blackrush/pkg/child` package
 *Example* `:GoCurTest` in the file `$GOPATH/src/github.com/Blackrush/gofus/main.go` will try to test the
 package `github.com/Blackrush/gofus`
 
-* **:GoImport**, **:GoImportAs** and **GoDrop** are equivalent of original **:Import**, **:ImportAs** and **:Drop**
+* **:GoImport**, **:GoImportAs** and **:GoDrop** are equivalent of original **:Import**, **:ImportAs** and **:Drop**
 but takes all a relative package path to the current working directory
 
 See [#1](https://github.com/Blackrush/vim-gocode/issues/1) to see future commands implementation.
