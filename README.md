@@ -50,6 +50,8 @@ And then run vim :
 
 > vim +BundleInstall
 
+If you are running under OS X, you might want to read [these instructions](https://github.com/Blackrush/vim-gocode/wiki/Installation-on-OS-X) to properly install it.
+
 ### Pathogen
 
 *todo*
