@@ -16,12 +16,22 @@ if exists("b:did_ftplugin_go_fmt")
     finish
 endif
 
+if !exists("g:gocode_gofmt_tabs")
+    let g:gocode_gofmt_tabs = ' -tabs=' . (&expandtab ? 'false' : 'true')
+endif
+
+if !exists("g:gocode_gofmt_tabwidth") && &expandtab
+    let g:gocode_gofmt_tabwidth = ' -tabwidth=' . &tabstop
+endif
+
 command! -buffer Fmt call s:GoFormat()
 autocmd FileType go autocmd BufWritePre <buffer> :keepjumps Fmt " thanks @justinmk
 
 function! s:GoFormat()
     let view = winsaveview()
-    silent %!gofmt
+
+    silent execute '%!gofmt' . g:gocode_gofmt_tabs . g:gocode_gofmt_tabwidth
+
     if v:shell_error
         let errors = []
         for line in getline(1, line('$'))
