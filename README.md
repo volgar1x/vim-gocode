@@ -44,14 +44,15 @@ See [#1](https://github.com/Blackrush/vim-gocode/issues/1) to see future command
 
 Add this line to your ~/.vimrc configuration file :
 
-> Bundle 'Blackrush/vim-gocode'
+    Bundle 'Blackrush/vim-gocode'
 
 And then run vim :
 
-> vim +BundleInstall
+    vim +BundleInstall
 
 If you are running under OS X, you might want to read [these instructions](https://github.com/Blackrush/vim-gocode/wiki/Installation-on-OS-X) to properly install it.
 
 ### Pathogen
 
-*todo*
+    cd ~/.vim/bundle
+    git clone git@github.com:Blackrush/vim-gocode.git
