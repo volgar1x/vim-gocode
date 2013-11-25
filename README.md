@@ -40,6 +40,12 @@ See [#1](https://github.com/Blackrush/vim-gocode/issues/1) to see future command
 
 ## Installation
 
+Make sure you have installed [gocode](https://github.com/nsf/gocode) before installing this plugin :
+
+```bash
+go get github.com/nsf/gocode
+```
+
 ### Vundle
 
 Add this line to your ~/.vimrc configuration file :
