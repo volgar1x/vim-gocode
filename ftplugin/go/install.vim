@@ -35,4 +35,14 @@ function! s:GoTest(file, relpkg)
 	endif
 endfunction
 
+command! -buffer -nargs=1 -complete=customlist,GocodeCompletePkg GoTestVerbose call s:GoTestVerbose(getcwd(), <f-args>)
+function! s:GoTestVerbose(file, relpkg)
+	let pkg=GoRelPkg(a:file, a:relpkg)
+	if pkg != -1
+		echo system('go test -v '.pkg)
+	else
+		echohl Error | echo 'You are not in a go package' | echohl None
+	endif
+endfunction
+
 let b:did_ftplugin_go_install=1
