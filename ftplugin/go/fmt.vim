@@ -20,8 +20,12 @@ if !exists("g:gocode_gofmt_tabs")
     let g:gocode_gofmt_tabs = ' -tabs=' . (&expandtab ? 'false' : 'true')
 endif
 
-if !exists("g:gocode_gofmt_tabwidth") && &expandtab
-    let g:gocode_gofmt_tabwidth = ' -tabwidth=' . &tabstop
+if !exists("g:gocode_gofmt_tabwidth")
+    if &expandtab
+        let g:gocode_gofmt_tabwidth = ' -tabwidth=' . &tabstop
+    else
+        let g:gocode_gofmt_tabwidth = ''
+    endif
 endif
 
 command! -buffer Fmt call s:GoFormat()
