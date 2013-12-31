@@ -29,7 +29,7 @@ if !exists("g:gocode_gofmt_tabwidth")
 endif
 
 command! -buffer Fmt call s:GoFormat()
-autocmd FileType go autocmd BufWritePre <buffer> :keepjumps Fmt " thanks @justinmk
+"autocmd FileType go autocmd BufWritePre <buffer> :keepjumps Fmt " thanks @justinmk
 
 function! s:GoFormat()
     let view = winsaveview()
