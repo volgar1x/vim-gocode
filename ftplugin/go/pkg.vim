@@ -21,20 +21,25 @@ endfunction
 if !exists('g:gocode_gopath')
 	let g:gocode_gopath=TrimSystemOutput(system('go env GOPATH'))
 endif
-let s:gopath=ReadLink(g:gocode_gopath)
+let s:gopaths=map(split(g:gocode_gopath, ':'), 'ReadLink(v:val)')
 
 function! GoPkg(arg)
-	let s:path=ReadLink(a:arg)
+	let path=ReadLink(a:arg)
 
-	if match(s:path, s:gopath) < 0
-		echohl Error | echomsg "You are not in a go package" | echohl None
+        for dir in s:gopaths
+		if len(dir) > 0 && match(path, dir) == 0
+			let gopath=dir
+		endif
+	endfor
+
+	if !exists('gopath')
 		return -1
 	endif
 
-	if isdirectory(s:path)
-		return substitute(s:path, s:gopath.'/src/', '', '')
+	if isdirectory(path)
+		return substitute(path, gopath.'/src/', '', '')
 	else
-		return substitute(substitute(s:path, s:gopath.'/src/', '', ''), '/'.BaseName(s:path), '', '')
+		return substitute(substitute(path, gopath.'/src/', '', ''), '/'.BaseName(path), '', '')
 	endif
 endfunction
 
