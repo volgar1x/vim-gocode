@@ -16,25 +16,22 @@ if exists("b:did_ftplugin_go_fmt")
     finish
 endif
 
-if !exists("g:gocode_gofmt_tabs")
-    let g:gocode_gofmt_tabs = ' -tabs=' . (&expandtab ? 'false' : 'true')
-endif
-
-if !exists("g:gocode_gofmt_tabwidth")
-    if &expandtab
-        let g:gocode_gofmt_tabwidth = ' -tabwidth=' . &tabstop
-    else
-        let g:gocode_gofmt_tabwidth = ''
-    endif
-endif
-
 command! -buffer Fmt call s:GoFormat()
-autocmd FileType go autocmd BufWritePre <buffer> :keepjumps Fmt " thanks @justinmk
+
+" Run gofmt before saving file
+autocmd BufWritePre <buffer> :keepjumps Fmt " thanks @justinmk
 
 function! s:GoFormat()
     let view = winsaveview()
 
-    silent execute '%!gofmt' . g:gocode_gofmt_tabs . g:gocode_gofmt_tabwidth
+    " If spaces are used for indents, configure gofmt
+    if &smarttab || &expandtab
+        let tabs = ' -tabs=false -tabwidth=' . (&sw ? &sw : (&sts ? &sts : &ts))
+    else 
+        let tabs = ''
+    endif
+
+    silent execute '%!gofmt' . tabs
 
     if v:shell_error
         let errors = []
