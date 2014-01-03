@@ -11,5 +11,10 @@ if exists(':CompilerSet') != 2		" older Vim always used :setlocal
   command -nargs=* CompilerSet setlocal <args>
 endif
 
-CompilerSet makeprg=go\ build\ $*\ %
+if exists('b:gopackage')
+    execute 'CompilerSet makeprg=go\ build\ $*\ ' . escape(b:gopackage, ' \')
+else
+    CompilerSet makeprg=go\ build\ $*\ %
+endif
+
 CompilerSet errorformat=%f:%l:\ %m
