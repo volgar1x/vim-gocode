@@ -62,9 +62,9 @@ if g:go_import_commands
     command! -buffer -nargs=1 -complete=customlist,go#complete#Package Import call s:SwitchImport(1, '', <f-args>)
     command! -buffer -nargs=* -complete=customlist,go#complete#Package ImportAs call s:SwitchImport(1, <f-args>)
 
-    command! -buffer -nargs=? -complete=customlist,GocodeCompletePkg GoDrop call s:RelSwitchImport(0, getcwd(), '', <f-args>)
-    command! -buffer -nargs=1 -complete=customlist,GocodeCompletePkg GoImport call s:RelSwitchImport(1, getcwd(), '', <f-args>)
-    command! -buffer -nargs=* -complete=customlist,GocodeCompletePkg GoImportAs call s:RelSwitchImport(1, getcwd(), <f-args>)
+    command! -buffer -nargs=? -complete=dir GoDrop call s:RelSwitchImport(0, getcwd(), '', <f-args>)
+    command! -buffer -nargs=1 -complete=dir GoImport call s:RelSwitchImport(1, getcwd(), '', <f-args>)
+    command! -buffer -nargs=* -complete=dir GoImportAs call s:RelSwitchImport(1, getcwd(), <f-args>)
 endif
 
 if g:go_import_maps
