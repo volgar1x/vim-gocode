@@ -28,37 +28,13 @@ if len(s:goarch) == 0
   endif
 endif
 
-function! go#complete#PackageMembers(package, member)
-  silent! let content = system('godoc ' . a:package)
-  if v:shell_error || !len(content)
-    return []
-  endif
-  let lines = filter(split(content, "\n"),"v:val !~ '^\\s\\+$'")
-  try
-    let mx1 = '^\s\+\(\S+\)\s\+=\s\+.*'
-    let mx2 = '^\%(const\|var\|type\|func\) \([A-Z][^ (]\+\).*'
-    let candidates =
-    \   map(filter(copy(lines), 'v:val =~ mx1'), 'substitute(v:val, mx1, "\\1", "")')
-    \ + map(filter(copy(lines), 'v:val =~ mx2'), 'substitute(v:val, mx2, "\\1", "")')
-    return filter(candidates, '!stridx(v:val, a:member)')
-  catch
-    return []
-  endtry
-endfunction
-
-function! go#complete#Package(ArgLead, CmdLine, CursorPos)
+function! go#package#Paths()
   let dirs = []
-
-  let words = split(a:CmdLine, '\s\+', 1)
-  if len(words) > 2
-    " Complete package members
-    return go#complete#PackageMembers(words[1], words[2])
-  endif
 
   if executable('go')
     let goroot = substitute(system('go env GOROOT'), '\n', '', 'g')
     if v:shell_error
-      echomsg '\'go env GOROOT\' failed'
+      echomsg '''go env GOROOT'' failed'
     endif
   else
     let goroot = $GOROOT
@@ -76,6 +52,58 @@ function! go#complete#Package(ArgLead, CmdLine, CursorPos)
   if workspaces != []
     let dirs += workspaces
   endif
+
+  return dirs
+endfunction
+
+function! go#package#FromPath(arg)
+    let path = fnamemodify(resolve(a:arg), ':p')
+    let dirs = go#package#Paths()
+
+    for dir in dirs
+        if len(dir) && match(path, dir) == 0
+            let workspace = dir
+        endif
+    endfor
+
+    if !exists('workspace')
+        return -1
+    endif
+
+    if isdirectory(path)
+        return substitute(path, workspace . 'src/', '', '')
+    else
+        return substitute(substitute(path, workspace . 'src/', '', ''),
+                    \ '/' . fnamemodify(path, ':t'), '', '')
+    endif
+endfunction
+
+function! go#package#CompleteMembers(package, member)
+  silent! let content = system('godoc ' . a:package)
+  if v:shell_error || !len(content)
+    return []
+  endif
+  let lines = filter(split(content, "\n"),"v:val !~ '^\\s\\+$'")
+  try
+    let mx1 = '^\s\+\(\S+\)\s\+=\s\+.*'
+    let mx2 = '^\%(const\|var\|type\|func\) \([A-Z][^ (]\+\).*'
+    let candidates =
+    \   map(filter(copy(lines), 'v:val =~ mx1'), 'substitute(v:val, mx1, "\\1", "")')
+    \ + map(filter(copy(lines), 'v:val =~ mx2'), 'substitute(v:val, mx2, "\\1", "")')
+    return filter(candidates, '!stridx(v:val, a:member)')
+  catch
+    return []
+  endtry
+endfunction
+
+function! go#package#Complete(ArgLead, CmdLine, CursorPos)
+  let words = split(a:CmdLine, '\s\+', 1)
+  if len(words) > 2
+    " Complete package members
+    return go#package#CompleteMembers(words[1], words[2])
+  endif
+
+  let dirs = go#package#Paths()
 
   if len(dirs) == 0
     " should not happen
