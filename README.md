@@ -1,7 +1,8 @@
 vim-gocode
 ==========
 
-All credit goes to [nsf/code](http://github.com/nsf/gocode)
+All credit goes to [nsf/code](http://github.com/nsf/gocode) and Go authors.
+All Vim plugins from Go 1.2 are also included.
 
 ## Commands
 
@@ -35,6 +36,8 @@ package `github.com/Blackrush/gofus`
 
 * **:GoImport**, **:GoImportAs** and **:GoDrop** are equivalent of original **:Import**, **:ImportAs** and **:Drop**
 but takes all a relative package path to the current working directory
+
+* **:make** — you can use QuickFix to iterate through build errors if any; if file is in subdirectory of $GOPATH/src/, the whole package is build, else — only current file
 
 See [#1](https://github.com/Blackrush/vim-gocode/issues/1) to see future commands implementation.
 
