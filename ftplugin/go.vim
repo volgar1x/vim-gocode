@@ -17,6 +17,11 @@ let b:undo_ftplugin = "setl com< cms<"
 " Set gocode completion
 setlocal omnifunc=gocomplete#Complete
 
+" Set b:gopackage if any
+if type(go#package#FromPath(@%)) == type('')
+    let b:gopackage = go#package#FromPath(@%)
+endif
+
 " Set compiler for :make command
 compiler go
 

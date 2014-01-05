@@ -30,10 +30,4 @@ function! s:GoRelPkg(rel)
     end
 endfunction
 
-" Set b:gopackage if any
-if type(go#package#FromPath(@%)) == type('')
-    let b:gopackage = go#package#FromPath(@%)
-    compiler go " enable building the whole package
-endif
-
 let b:did_ft_plugin_go_pkg=1
