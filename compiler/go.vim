@@ -5,12 +5,12 @@
 " compiler/go.vim: Vim compiler file for Go.
 
 if exists('current_compiler')
-  finish
+    finish
 endif
 let current_compiler = 'go'
 
 if exists(':CompilerSet') != 2		" older Vim always used :setlocal
-  command -nargs=* CompilerSet setlocal <args>
+    command -nargs=* CompilerSet setlocal <args>
 endif
 
 if exists('b:gopackage')
@@ -23,11 +23,11 @@ let s:save_cpo = &cpo
 set cpo-=C
 
 CompilerSet errorformat=
-        \%-G#\ %.%#,
-        \%E%f:%l:%c:\ %m,
-        \%E%f:%l:\ %m,
-        \%C%*\\s%m,
-        \%-G%.%#
+            \%-G#\ %.%#,
+            \%E%f:%l:%c:\ %m,
+            \%E%f:%l:\ %m,
+            \%C%*\\s%m,
+            \%-G%.%#
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

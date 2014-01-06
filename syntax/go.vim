@@ -26,23 +26,23 @@
 
 " Quit when a (custom) syntax file was already loaded
 if exists("b:current_syntax")
-  finish
+    finish
 endif
 
 if !exists("go_highlight_array_whitespace_error")
-  let go_highlight_array_whitespace_error = 1
+    let go_highlight_array_whitespace_error = 1
 endif
 if !exists("go_highlight_chan_whitespace_error")
-  let go_highlight_chan_whitespace_error = 1
+    let go_highlight_chan_whitespace_error = 1
 endif
 if !exists("go_highlight_extra_types")
-  let go_highlight_extra_types = 1
+    let go_highlight_extra_types = 1
 endif
 if !exists("go_highlight_space_tab_error")
-  let go_highlight_space_tab_error = 1
+    let go_highlight_space_tab_error = 1
 endif
 if !exists("go_highlight_trailing_whitespace_error")
-  let go_highlight_trailing_whitespace_error = 1
+    let go_highlight_trailing_whitespace_error = 1
 endif
 
 syn case match
@@ -163,35 +163,35 @@ hi def link     goImaginary         Number
 
 " Spaces after "[]"
 if go_highlight_array_whitespace_error != 0
-  syn match goSpaceError display "\(\[\]\)\@<=\s\+"
+    syn match goSpaceError display "\(\[\]\)\@<=\s\+"
 endif
 
 " Spacing errors around the 'chan' keyword
 if go_highlight_chan_whitespace_error != 0
-  " receive-only annotation on chan type
-  syn match goSpaceError display "\(<-\)\@<=\s\+\(chan\>\)\@="
-  " send-only annotation on chan type
-  syn match goSpaceError display "\(\<chan\)\@<=\s\+\(<-\)\@="
-  " value-ignoring receives in a few contexts
-  syn match goSpaceError display "\(\(^\|[={(,;]\)\s*<-\)\@<=\s\+"
+    " receive-only annotation on chan type
+    syn match goSpaceError display "\(<-\)\@<=\s\+\(chan\>\)\@="
+    " send-only annotation on chan type
+    syn match goSpaceError display "\(\<chan\)\@<=\s\+\(<-\)\@="
+    " value-ignoring receives in a few contexts
+    syn match goSpaceError display "\(\(^\|[={(,;]\)\s*<-\)\@<=\s\+"
 endif
 
 " Extra types commonly seen
 if go_highlight_extra_types != 0
-  syn match goExtraType /\<bytes\.\(Buffer\)\>/
-  syn match goExtraType /\<io\.\(Reader\|Writer\|ReadWriter\|ReadWriteCloser\)\>/
-  syn match goExtraType /\<reflect\.\(Kind\|Type\|Value\)\>/
-  syn match goExtraType /\<unsafe\.Pointer\>/
+    syn match goExtraType /\<bytes\.\(Buffer\)\>/
+    syn match goExtraType /\<io\.\(Reader\|Writer\|ReadWriter\|ReadWriteCloser\)\>/
+    syn match goExtraType /\<reflect\.\(Kind\|Type\|Value\)\>/
+    syn match goExtraType /\<unsafe\.Pointer\>/
 endif
 
 " Space-tab error
 if go_highlight_space_tab_error != 0
-  syn match goSpaceError display " \+\t"me=e-1
+    syn match goSpaceError display " \+\t"me=e-1
 endif
 
 " Trailing white space error
 if go_highlight_trailing_whitespace_error != 0
-  syn match goSpaceError display excludenl "\s\+$"
+    syn match goSpaceError display excludenl "\s\+$"
 endif
 
 hi def link     goExtraType         Type
@@ -205,3 +205,5 @@ hi def link     goSpaceError        Error
 syn sync minlines=500
 
 let b:current_syntax = "go"
+
+" vim:sw=4:et

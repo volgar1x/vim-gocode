@@ -264,4 +264,4 @@ endfunction
 
 let b:did_ftplugin_go_import = 1
 
-" vim:ts=4:sw=4:et
+" vim:sw=4:et

@@ -25,4 +25,4 @@ endif
 " Set compiler for :make command
 compiler go
 
-" vim:ts=4:sw=4:et
+" vim:sw=4:et

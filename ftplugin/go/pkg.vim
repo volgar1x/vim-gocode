@@ -38,3 +38,5 @@ function! s:GoRelPkg(rel)
 endfunction
 
 let b:did_ft_plugin_go_pkg=1
+
+" vim:sw=4:et

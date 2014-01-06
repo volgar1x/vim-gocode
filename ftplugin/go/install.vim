@@ -47,3 +47,5 @@ function! s:GoTestVerbose(file, relpkg)
 endfunction
 
 let b:did_ftplugin_go_install=1
+
+" vim:sw=4:et
