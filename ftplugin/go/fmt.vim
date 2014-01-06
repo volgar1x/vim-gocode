@@ -30,16 +30,22 @@ if !exists("g:go_fmt_commands")
     let g:go_fmt_commands = 1
 endif
 
-if !exists("g:gofmt_command")
-    let g:gofmt_command = "gofmt"
-endif
-
 if g:go_fmt_commands
     command! -buffer Fmt call s:GoFormat()
 endif
 
-" Run gofmt before saving file
-autocmd BufWritePre <buffer> :keepjumps Fmt " thanks @justinmk
+if !exists('g:go_fmt_autofmt')
+    let g:go_fmt_autofmt = 1
+endif
+
+if g:go_fmt_autofmt
+    " Run gofmt before saving file
+    autocmd BufWritePre <buffer> :keepjumps Fmt " thanks @justinmk
+endif
+
+if !exists("g:gofmt_command")
+    let g:gofmt_command = "gofmt"
+endif
 
 function! s:GoFormat()
     let view = winsaveview()

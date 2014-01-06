@@ -53,10 +53,6 @@ if !exists("g:go_import_commands")
     let g:go_import_commands = 1
 endif
 
-if !exists("g:go_import_maps")
-    let g:go_import_maps = 1
-endif
-
 if g:go_import_commands
     command! -buffer -nargs=? -complete=customlist,go#package#Complete Drop call s:SwitchImport(0, '', <f-args>)
     command! -buffer -nargs=1 -complete=customlist,go#package#Complete Import call s:SwitchImport(1, '', <f-args>)
@@ -65,6 +61,10 @@ if g:go_import_commands
     command! -buffer -nargs=? -complete=dir GoDrop call s:RelSwitchImport(0, getcwd(), '', <f-args>)
     command! -buffer -nargs=1 -complete=dir GoImport call s:RelSwitchImport(1, getcwd(), '', <f-args>)
     command! -buffer -nargs=* -complete=dir GoImportAs call s:RelSwitchImport(1, getcwd(), <f-args>)
+endif
+
+if !exists("g:go_import_maps")
+    let g:go_import_maps = 1
 endif
 
 if g:go_import_maps

@@ -2,6 +2,15 @@ if exists('b:did_ftplugin_go_pkg')
     finish
 endif
 
+if !exists('g:go_package_commands')
+    let g:go_package_commands = 1
+endif
+
+if g:go_package_commands
+    command! -buffer CurPkg call s:GoCurPkg()
+    command! -buffer -nargs=1 RelPkg call s:GoRelPkg(<f-args>)
+endif
+
 function! GoRelPkg(file, relpkg)
     if isdirectory(a:file)
         return go#package#FromPath(a:file.'/'.a:relpkg)
@@ -10,7 +19,6 @@ function! GoRelPkg(file, relpkg)
     end
 endfunction
 
-command! -buffer CurPkg call s:GoCurPkg()
 function! s:GoCurPkg()
     let pkg=go#package#FromPath(@%)
     if pkg != -1
@@ -20,7 +28,6 @@ function! s:GoCurPkg()
     endif
 endfunction
 
-command! -buffer -nargs=1 RelPkg call s:GoRelPkg(<f-args>)
 function! s:GoRelPkg(rel)
     let pkg=GoRelPkg(@%, a:rel)
     if pkg != -1
