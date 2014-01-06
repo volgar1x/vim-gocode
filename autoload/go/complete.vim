@@ -60,7 +60,7 @@ fu! s:gocodeCursor()
     if &encoding != 'utf-8'
         let c = col('.')
         let buf = line('.') == 1 ? "" : (join(getline(1, line('.')-1), "\n") . "\n")
-        let buf .= c < 1 ? "" : getline('.')[:c-1]
+        let buf .= c == 1 ? "" : getline('.')[:c-2]
         return printf('%d', len(iconv(buf, &encoding, "utf-8")))
     endif
     return printf('%d', line2byte(line('.')) + (col('.')-2))
@@ -75,7 +75,7 @@ fu! s:gocodeAutocomplete()
     return result
 endf
 
-fu! gocomplete#Complete(findstart, base)
+fu! go#complete#Complete(findstart, base)
     "findstart = 1 when we need to get the text length
     if a:findstart == 1
         execute "silent let g:gocomplete_completions = " . s:gocodeAutocomplete()

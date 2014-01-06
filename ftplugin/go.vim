@@ -15,7 +15,7 @@ setlocal commentstring=//\ %s
 let b:undo_ftplugin = "setl com< cms<"
 
 " Set gocode completion
-setlocal omnifunc=gocomplete#Complete
+setlocal omnifunc=go#complete#Complete
 
 " Set b:gopackage if any
 if type(go#package#FromPath(@%)) == type('')
