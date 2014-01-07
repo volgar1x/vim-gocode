@@ -57,7 +57,7 @@ function! go#package#Paths()
 endfunction
 
 function! go#package#FromPath(arg)
-    let path = fnamemodify(resolve(a:arg), ':p')
+    let path = fnamemodify(resolve(a:arg), ':p:h')
     let dirs = go#package#Paths()
 
     for dir in dirs
@@ -70,12 +70,7 @@ function! go#package#FromPath(arg)
         return -1
     endif
 
-    if isdirectory(path)
-        return substitute(path, workspace . 'src/', '', '')
-    else
-        return substitute(substitute(path, workspace . 'src/', '', ''),
-                         \ '/' . fnamemodify(path, ':t'), '', '')
-    endif
+    return substitute(path, workspace . '/src/', '', '')
 endfunction
 
 function! go#package#CompleteMembers(package, member)
