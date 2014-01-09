@@ -4,5 +4,29 @@
                  and other stuff for Go programming language
 
 ==============================================================================
+CONTENTS                                                 *vim-gocode-contents*
+
+    1. Usage...........................|vim-gocode-usage|
+
+==============================================================================
+1. Usage                                                    *vim-gocode-usage*
+
+:Import <package>                                                    *:Import*
+Add <package> to import section of file
+
+:ImportAs <alias> <package>                                        *:ImportAs*
+Add <package> to import section of file with name <alias>
+
+:Drop <package>                                                        *:Drop*
+Remove <package> from import section of file
+
+:Fmt                                                                    *:Fmt*
+Format file with gofmt
+
+:Godoc [<words>]                                                      *:Godoc*
+Open Godoc for <words>. If no arguments given open Godoc for word under the
+cursor.
+
+==============================================================================
 
  vim:tw=78:ts=8:ft=help:norl:
