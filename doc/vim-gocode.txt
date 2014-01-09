@@ -1,0 +1,8 @@
+*vim-gocode.txt*                 Tools for Golang
+
+       Compiler plugin, syntax highlight, omni completion (with gocode)
+                 and other stuff for Go programming language
+
+==============================================================================
+
+ vim:tw=78:ts=8:ft=help:norl:
