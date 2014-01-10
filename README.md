@@ -4,6 +4,7 @@ vim-gocode
 All credit goes to [nsf/code](http://github.com/nsf/gocode) and Go authors.
 All Vim plugins from Go 1.2 are also included.
 
+You should *not* install this plugin with either [fsouza/go.vim](https://github.com/fsouza/go.vim) or [jnwhiteh/vim-golang](https://github.com/jnwhiteh/vim-golang)! It could take unknown effect on your setup.
 ## Commands
 
 * **:CurPkg** takes no argument and print the current file's package
