@@ -27,6 +27,17 @@ Format file with gofmt
 Open Godoc for <words>. If no arguments given open Godoc for word under the
 cursor.
 
+:CurPkg                                                              *:CurPkg*
+Print current file's package
+Example: :CurPkg in the "$GOPATH/src/github.com/Blackrush/gofus/main.go"
+         file will print "github.com/Blackrush/gofus"
+
+:RelPkg <rel-path>                                                *:RelPkg*
+Print full package path of <rel-path>
+Example: :GoCurInstall in the file
+         "$GOPATH/src/github.com/Blackrush/gofus/main.go" will try to install
+         the package "github.com/Blackrush/gofus"
+
 ==============================================================================
 
  vim:tw=78:ts=8:ft=help:norl:
