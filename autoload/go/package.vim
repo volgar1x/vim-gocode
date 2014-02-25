@@ -70,7 +70,7 @@ function! go#package#FromPath(arg)
         return -1
     endif
 
-    return substitute(path, workspace . '/src/', '', '')
+    return substitute(path, workspace . 'src/', '', '')
 endfunction
 
 function! go#package#CompleteMembers(package, member)
