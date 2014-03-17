@@ -11,32 +11,54 @@ CONTENTS                                                 *vim-gocode-contents*
 ==============================================================================
 1. Usage                                                    *vim-gocode-usage*
 
-:Import <package>                                                    *:Import*
-Add <package> to import section of file
+                                                            *:Import*
+:Import <package>               Add <package> to import section of file.
 
-:ImportAs <alias> <package>                                        *:ImportAs*
-Add <package> to import section of file with name <alias>
+                                                            *:ImportAs*
+:ImportAs <alias> <package>     Add <package> to import section of file with 
+                                name <alias>.
 
-:Drop <package>                                                        *:Drop*
-Remove <package> from import section of file
+                                                            *:Drop*
+:Drop <package>                 Remove <package> from import section of file.
 
-:Fmt                                                                    *:Fmt*
-Format file with gofmt
+                                                            *:Fmt*
+:Fmt                            Format file with gofmt.
 
-:Godoc [<words>]                                                      *:Godoc*
-Open Godoc for <words>. If no arguments given open Godoc for word under the
-cursor.
+                                                            *:Godoc*
+:Godoc [<words>]                Open Godoc for <words>. If no arguments given
+                                open Godoc for word under the cursor.
 
-:CurPkg                                                              *:CurPkg*
-Print current file's package
-Example: :CurPkg in the "$GOPATH/src/github.com/Blackrush/gofus/main.go"
-         file will print "github.com/Blackrush/gofus"
+                                                            *:RelPkg*
+:RelPkg [<rel-path>]            Print full package path of <rel-path>. If no
+                                argument is given, default to current package.
 
-:RelPkg <rel-path>                                                *:RelPkg*
-Print full package path of <rel-path>
-Example: :GoCurInstall in the file
-         "$GOPATH/src/github.com/Blackrush/gofus/main.go" will try to install
-         the package "github.com/Blackrush/gofus"
+
+                                                            *:GoInstall*
+:GoInstall [<rel-path>]         Install the package at <rel-path> or current
+                                package if no argument is given.
+
+                                                            *:GoTest*
+:GoTest [<rel-path>]            Test the package at <rel-path> or current
+                                package if no argument is given.
+
+
+                                                            *:GoTestVerbose*
+:GoTestVerbse [<rel-path>]      Verbosely test the pacakge at <re-path> or 
+                                current package if no argument is given.
+
+
+                                                            *:GoImport*
+:GoImport <rel-path>            Same as |:Import| but take a relative package
+                                path to the current working directory.
+
+                                                            *:GoImportAs*
+:GoImportAs <rel-path>          Same as |:ImportAs| but take a relative 
+                                package path to the current working directory.
+
+
+                                                            *:GoDrop*
+:GoDrop <rel-path>              Same as |:Drop| but take a relative package 
+                                path to the current working directory.
 
 ==============================================================================
 

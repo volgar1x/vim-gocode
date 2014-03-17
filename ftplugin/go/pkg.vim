@@ -7,8 +7,7 @@ if !exists('g:go_package_commands')
 endif
 
 if g:go_package_commands
-    command! -buffer CurPkg call s:GoCurPkg()
-    command! -buffer -nargs=1 RelPkg call s:GoRelPkg(<f-args>)
+    command! -buffer -nargs=? RelPkg call s:GoRelPkg(<f-args>)
 endif
 
 function! GoRelPkg(file, relpkg)
@@ -28,8 +27,13 @@ function! s:GoCurPkg()
     endif
 endfunction
 
-function! s:GoRelPkg(rel)
-    let pkg=GoRelPkg(@%, a:rel)
+function! s:GoRelPkg(...)
+    if a:0 == 0 
+        let relpkg = '.'
+    else
+        let relpkg = a:1
+    endif
+    let pkg=GoRelPkg(@%, relpkg)
     if pkg != -1
         echo pkg
     else
