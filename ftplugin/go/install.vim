@@ -7,15 +7,19 @@ if !exists('g:go_install_commands')
 endif
 
 if g:go_install_commands
-    command! -buffer -nargs=1 -complete=dir GoInstall call s:GoInstall(getcwd(), <f-args>)
-    command! -buffer -nargs=1 -complete=dir GoTestVerbose call s:GoTestVerbose(getcwd(), <f-args>)
-    command! -buffer GoCurInstall call s:GoInstall(@%, '.')
-    command! -buffer -nargs=1 -complete=dir GoTest call s:GoTest(getcwd(), <f-args>)
-    command! -buffer GoCurTest call s:GoTest(@%, '.')
+    command! -buffer -nargs=? -complete=dir GoInstall call s:GoInstall(getcwd(), <f-args>)
+    command! -buffer -nargs=? -complete=dir GoTest call s:GoTest(getcwd(), <f-args>)
+    command! -buffer -nargs=? -complete=dir GoTestVerbose call s:GoTestVerbose(getcwd(), <f-args>)
 endif
 
-function! s:GoInstall(file, relpkg)
-    let pkg=GoRelPkg(a:file, a:relpkg)
+function! s:GoInstall(file, ...)
+    if a:0 == 0
+        " no arguments
+        let relpkg = '.'
+    else
+        let relpkg = a:1
+    endif
+    let pkg=GoRelPkg(a:file, relpkg)
     if pkg != -1
         let output=system('go install '.pkg)
         if !v:shell_error
@@ -28,8 +32,14 @@ function! s:GoInstall(file, relpkg)
     endif
 endfunction
 
-function! s:GoTest(file, relpkg)
-    let pkg=GoRelPkg(a:file, a:relpkg)
+function! s:GoTest(file, ...)
+    if a:0 == 0
+        " no arguments
+        let relpkg = '.'
+    else
+        let relpkg = a:1
+    endif
+    let pkg=GoRelPkg(a:file, relpkg)
     if pkg != -1
         echo system('go test '.pkg)
     else
@@ -37,8 +47,14 @@ function! s:GoTest(file, relpkg)
     endif
 endfunction
 
-function! s:GoTestVerbose(file, relpkg)
-    let pkg=GoRelPkg(a:file, a:relpkg)
+function! s:GoTestVerbose(file, ...)
+    if a:0 == 0
+        " no arguments
+        let relpkg = '.'
+    else
+        let relpkg = a:1
+    endif
+    let pkg=GoRelPkg(a:file, relpkg)
     if pkg != -1
         echo system('go test -v '.pkg)
     else
