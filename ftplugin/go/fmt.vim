@@ -51,7 +51,7 @@ function! s:GoFormat()
     let view = winsaveview()
 
     " If spaces are used for indents, configure gofmt
-    if &expandtab
+    if &expandtab && g:gofmt_command != 'goimports'
         let tabs = ' -tabs=false -tabwidth=' . (&sw ? &sw : (&sts ? &sts : &ts))
     else 
         let tabs = ''
