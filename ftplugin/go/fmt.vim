@@ -50,16 +50,7 @@ endif
 function! s:GoFormat()
     let view = winsaveview()
 
-    " If spaces are used for indents, configure gofmt
-
-    let tabs = ''
-    if g:gofmt_command == "gofmt"
-        if &expandtab
-            let tabs = ' -tabs=false -tabwidth=' . (&sw ? &sw : (&sts ? &sts : &ts))
-        endif
-    endif
-
-    silent execute "%!" . g:gofmt_command . tabs
+    silent execute "%!" . g:gofmt_command
 
     if v:shell_error
         let errors = []
