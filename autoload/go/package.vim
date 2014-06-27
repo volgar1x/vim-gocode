@@ -31,13 +31,15 @@ endif
 function! go#package#Paths()
     let dirs = []
 
-    if executable('go')
-        let goroot = substitute(system('go env GOROOT'), '\n', '', 'g')
-        if v:shell_error
-            echomsg '''go env GOROOT'' failed'
-        endif
-    else
+    if exists('$GOROOT')
         let goroot = $GOROOT
+    else
+        if executable('go')
+            let goroot = substitute(system('go env GOROOT'), '\n', '', 'g')
+            if v:shell_error
+                echomsg '''go env GOROOT'' failed'
+            endif
+        endif
     endif
 
     if len(goroot) != 0 && isdirectory(goroot)
