@@ -50,4 +50,4 @@ And then run vim :
 ### Pathogen
 
     cd ~/.vim/bundle
-    git clone git@github.com:Blackrush/vim-gocode.git
+    git clone https://github.com/Blackrush/vim-gocode.git
